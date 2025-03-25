@@ -20,6 +20,18 @@ For detailed instructions on deploying your application, refer to the [deploymen
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
+## Authenticating `nix` with `GitHub`
+
+Add environment variable ...
+
+```sh
+NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN"
+```
+
+... to your Amplify environment where `$GITHUB_TOKEN` is [your `GitHub` personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+This allows `nix` to access private `GitHub` repositories.
+
 ## License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
