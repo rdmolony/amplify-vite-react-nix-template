@@ -1,9 +1,13 @@
+# NOTE: To support nix flakes, either:
+# - Set the AWS Amplify base image to public.ecr.aws/powerscope/amplify-builder
+# - Or install nix flakes manually as a command in this file
 version: 1
 backend:
   phases:
     build:
       commands:
         - npm ci --cache .npm --prefer-offline
+        - nix --extra-experimental-features "nix-command flakes" run .#hello
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:

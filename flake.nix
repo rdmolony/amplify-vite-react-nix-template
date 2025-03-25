@@ -23,6 +23,12 @@
       runserver = pkgs.writeShellScriptBin "run" ''
         ${runtime}/bin/npx concurrently 'npm run dev' 'npx ampx sandbox'
       '';
+      sayHello = pkgs.writeShellScriptBin "say-hello" ''
+        echo "Hello from Nix integration with Amplify!"
+        echo "Running on branch: $AWS_BRANCH"
+        echo "App ID: $AWS_APP_ID"
+        echo "Current time: $(date)"
+      '';
     in {
       devShell = pkgs.mkShell {
         buildInputs=devPkgs ++ runtimePkgs;
@@ -31,6 +37,10 @@
         default = {
           type = "app";
           program = "${runserver}/bin/run";
+        };
+        hello = {
+          type = "app";
+          program = "${sayHello}/bin/say-hello";
         };
       };
     }
